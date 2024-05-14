@@ -1,3 +1,5 @@
+@use 'hero';
+
 *{
     margin: 0;
     padding: 0;
@@ -16,10 +18,11 @@ body {
 @mixin text($fontSize: 16px){
     font-size: $fontSize;
     line-height: $fontSize + 10px;
+    color: $corTextoPrincipal;
 }
 
 @mixin title($fontSize: 40px){
-    @include text($font-size);
+    @include text($fontSize);
     color: $corTextoSecundario; 
 }
 
