@@ -1,33 +1,47 @@
 @use 'variaveis';
 
-.shows{
+.shows {
     padding: 2vw 5.6vw;
 
-    &__menu{
+    &__menu {
         display: flex;
         justify-content: center;
-        &__button{
+
+        &__button {
             color: variaveis.$corTextoSecundario;
             font-size: 20px;
-            border: none;
+            border: 5px solid transparent;
             padding-bottom: 5px;
             background: none;
             text-transform: uppercase;
             margin: 0 1vw;
 
-            &--is-active{
+            &--is-active {
                 border-bottom: 5px solid variaveis.$corTextoSecundario;
             }
         }
     }
-    
-    &__list{
+
+    &__list {
         margin-top: 44px;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
         gap: 24px;
-        &__item{
-            img{
+        
+        // Grid padrão para telas maiores
+        grid-template-columns: 1fr 1fr 1fr;
+
+        // Dois itens por linha em telas menores (ex: celulares em modo paisagem)
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        // Um item por linha em telas muito pequenas (ex: celulares em modo retrato)
+        @media (max-width: 480px) {
+            grid-template-columns: 1fr;
+        }
+
+        &__item {
+            img {
                 max-width: 100%;
                 border-radius: 4px;
             }

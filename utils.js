@@ -27,31 +27,44 @@ const imageSourcesMaisNoStarPlus = [
 
 const showsList = document.getElementById('showsList');
 
+let currentImages = [];
+
 // Função para criar os itens da lista com base nas imagens
 const renderImages = (imageArray) => {
+    if(currentImages === imageArray) return;
+
     showsList.innerHTML = "";
-    imageArray.forEach(src => {
-        const listItem = document.createElement('li');
-        listItem.classList.add('shows__list__item');
+    requestAnimationFrame(() => {
+        imageArray.forEach(src => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('shows__list__item');
 
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = 'Imagem em breve';
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = 'Imagem em breve';
 
-        listItem.appendChild(img);
-        showsList.appendChild(listItem);
+            listItem.appendChild(img);
+            showsList.appendChild(listItem);
+        });
+        currentImages = imageArray;
     });
 };
 
 // Função para lidar com o clique e selecionar o conjunto correto de imagens
 const handleClick = (e) => {
+    e.preventDefault()
     const buttonText = e.target.innerHTML;
 
     if(buttonText === "Em breve") {
         renderImages(imageSourcesEmBreve);
+        currentImages = imageSourcesEmBreve
     } else if(buttonText === "Mais populares") {
         renderImages(imageSourcesMaisPopulares);
+        currentImages = imageSourcesMaisPopulares
     } else {
         renderImages(imageSourcesMaisNoStarPlus);
+        currentImages = imageSourcesMaisNoStarPlus
     }
 };
+
+renderImages(imageSourcesEmBreve);
